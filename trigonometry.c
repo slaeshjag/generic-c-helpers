@@ -33,17 +33,14 @@ freely, subject to the following restrictions:
 		type angle;					\
 								\
 		if (dx == 0)					\
-			angle = 0;				\
+			angle = (dy<0)?-HUGE_VAL:HUGE_VAL;	\
 		else						\
 			angle = dy / dx;			\
 		angle = tan_func(angle);			\
 		if (dx < 0)					\
-			angle = -1*angle + M_PI;		\
-		else {						\
-			angle = -1*angle;			\
-			if (angle < 0)				\
-				angle = 2. * M_PI + angle;	\
-		}						\
+			angle = angle + M_PI;			\
+		else if (angle < 0)				\
+			angle = 2. * M_PI + angle;	\
 								\
 		return angle;					\
 	}
